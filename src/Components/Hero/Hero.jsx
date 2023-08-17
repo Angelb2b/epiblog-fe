@@ -47,7 +47,7 @@ const Hero = () => {
                     <img
                         style={{ height: '500px', objectFit: 'cover' }}
                         className="d-block w-100"
-                        src="https://www.emitfeltrinelli.it/wp-content/uploads/2018/09/code-1076536_960_720.jpg"
+                        src="https://www.aktsrl.com/wp-content/uploads/2022/05/img-articolo-programmazione-1-1080x675.jpg"
                         alt="Third slide"
                     />
                 </Carousel.Item>
