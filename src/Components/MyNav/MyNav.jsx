@@ -8,8 +8,6 @@ import React, { useEffect } from 'react'
 import { nanoid } from '@reduxjs/toolkit';
 import { useSession } from '../../middlewares/ProtectedRoutes';
 import { getAuthorById, getAuthors } from '../../Store/authorSlice';
-import { useMediaQuery } from 'react-responsive';
-
 const userSession = JSON.parse(localStorage.getItem('userLoggedIn'))
 
 const MyNav = () => {
@@ -18,8 +16,6 @@ const MyNav = () => {
   const user = useSelector(state => state.authors.singleAuthor.authorById)
   const session = useSession()
   console.log(session)
-
-  const isSmallScreen = useMediaQuery({ query: '(max-width: 576px)' });
 
   function logOut() {
     localStorage.removeItem('userLoggedIn')
@@ -47,9 +43,8 @@ const MyNav = () => {
             <Nav.Link as={Link} to={'/authors'}>See the Authors</Nav.Link>
           </Nav>
           <Form className="d-flex">
-            {isSmallScreen || !localStorage.getItem('userLoggedIn') ? (
-              <Button as={Link} to={`/login`} variant="info">Log In</Button>
-            ) : (
+            {!localStorage.getItem('userLoggedIn') ?
+              <Button as={Link} to={`/login`} variant="info">Log In</Button> :
               <>
                 <NavDropdown
                   title={<img style={{ width: '45px', height: '45px', borderRadius: '50px', border: 'solid 3px green' }} src={session.avatar || session.photos[0].value } />}
@@ -59,7 +54,7 @@ const MyNav = () => {
                 </NavDropdown>
                 <Button onClick={() => logOut()} variant="outline-danger" >Logout</Button>
               </>
-            )}
+            }
           </Form>
         </Navbar.Collapse>
       </Container>
